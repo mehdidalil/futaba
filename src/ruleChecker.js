@@ -26,6 +26,16 @@ const ruleChecker = {
 			genericValue(rule, elem[prop].length, prop, name, "character(s) long");
 		}
 	},
+	match: (rule, elem, prop, name) => {
+		if (rule) {
+			if (!((rule instanceof RegExp 
+					? rule
+					: new RegExp(rule))
+					.test(elem[prop]))) {
+				throw new Error(`${name} not valid !`);
+			}
+		}
+	},
 	items: (rule, elem, prop, name) => {
 		if (rule) {
 			elem[prop].forEach((d, i) => {
